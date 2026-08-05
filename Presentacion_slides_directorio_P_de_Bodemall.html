@@ -284,7 +284,7 @@
 <!-- 10 · MISMA PLATA -->
 <section class="slide">
   <div class="kicker" data-e="kn">Peras con peras · esperado, venta año 20</div>
-  <h2 data-e="tn">Todas con la misma plata: <span id="capNota2">—</span><span class="q" tabindex="0">?<span class="qt" data-e="dn1">Cada alternativa pide distinta plata: desarrollar exige $12.109 MM nuevos; no hacer nada, cero. A la que pide menos se le suma lo que le sobra, invertido al 5% real. Así todas parten con el mismo bolsillo y los totales se pueden comparar. El orden resultante es el mismo que da la TIR.</span></span></h2>
+  <h2 data-e="tn">Todas con la misma plata: <span id="capNota2">—</span><span class="q" tabindex="0">?<span class="qt" data-e="dn1"><b>El bolsillo: $24.509 MM</b> = $12.400 MM de Bodemall hoy (terreno + bodegas) + $12.109 MM de plata nueva que pide desarrollar (más $4.000 MM de crédito). Cada alternativa usa distinta cantidad de esa plata nueva; a la que usa menos se le suma el resto invertido al 5% real. Así todas parten iguales y los totales se pueden comparar. El orden resultante es el mismo que da la TIR.</span></span></h2>
   <p class="legend" style="margin:10px 0 12px"><span><i class="dot seg1"></i> Lo que produce la alternativa</span><span><i class="dot seg2"></i> Plata sobrante invertida al 5%</span></p>
   <div id="bars2"></div>
   <div class="total" style="margin-top:16px" data-e="dn2">Desarrollar no transforma $39.899 MM en $85.035 MM: transforma <strong>$72.029 MM en $85.035 MM</strong>. El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia sale al año 5</strong>.</div>
@@ -470,7 +470,7 @@ document.addEventListener("keydown",e=>{
 });
 
 // ---------- edición ----------
-const LS="pbodemall_slides_edits_r9"; // mapa v3: versiones anteriores ya incorporadas
+const LS="pbodemall_slides_edits_r10"; // mapa v3: versiones anteriores ya incorporadas
 function applyEdits(){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");for(const[id,html]of Object.entries(m)){const el=document.querySelector(`[data-e="${id}"]`);if(el)el.innerHTML=html;}}catch(e){}}
 function saveEdit(el){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");m[el.dataset.e]=el.innerHTML;localStorage.setItem(LS,JSON.stringify(m));}catch(e){}}
 function toggleEdit(){
