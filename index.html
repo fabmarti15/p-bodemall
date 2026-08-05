@@ -24,6 +24,8 @@
   .doc h2{font-size:17px;color:var(--navy);margin-bottom:4px}
   .doc span{font-size:13px;color:var(--gray)}
   .salir{background:none;border:0;color:var(--gray);font-size:12.5px;cursor:pointer;text-decoration:underline;margin-top:6px}
+  #visor{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff;z-index:40;display:none}
+  #volver{display:none;position:fixed;top:12px;left:14px;z-index:50;border:1px solid var(--line);background:rgba(255,255,255,.92);border-radius:99px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--ink);box-shadow:0 1px 6px rgba(0,0,0,.08)}
 </style>
 </head>
 <body>
@@ -44,6 +46,8 @@
     <button class="salir" onclick="salir()">Cerrar sesión</button>
   </div>
 </div>
+<iframe id="visor" title="documento"></iframe>
+<button id="volver" onclick="volver()">⌂ Menú</button>
 <script src="datos.js"></script>
 <script>
 const D=window.BODEMALL_DATOS;
@@ -56,8 +60,22 @@ async function descifrar(clave){
   return JSON.parse(new TextDecoder().decode(pt));
 }
 function abrir(id){
-  if(!cache)return;
-  document.open();document.write(cache[id]);document.close();
+  if(!cache||!cache[id])return;
+  const fr=document.getElementById("visor");
+  fr.srcdoc=cache[id].replace(/<head>/i,'<head><base target="_top">');
+  fr.style.display="block";
+  document.querySelector(".caja").style.display="none";
+  document.getElementById("volver").style.display="block";
+  fr.addEventListener("load",()=>{try{fr.contentWindow.focus();}catch(e){}},{once:true});
+}
+function volver(){
+  const fr=document.getElementById("visor");
+  fr.srcdoc="";fr.style.display="none";
+  document.getElementById("volver").style.display="none";
+  document.querySelector(".caja").style.display="";
+  document.getElementById("gate").style.display="none";
+  document.getElementById("menu").style.display="flex";
+  history.replaceState(null,"","index.html");
 }
 function salir(){sessionStorage.removeItem("bodemall_clave");location.href="index.html";}
 async function intentar(clave,auto){
