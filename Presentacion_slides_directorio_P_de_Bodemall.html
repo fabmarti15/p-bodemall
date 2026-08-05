@@ -62,6 +62,9 @@
   .tl li:last-child::after{display:none}
   .tl .when{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:block}
   .total{background:var(--bluebg);border-radius:10px;padding:9px 13px;margin-top:6px;font-size:14.5px}
+  .q{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:99px;background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;cursor:help;position:relative;vertical-align:middle;margin-left:6px;outline:none}
+  .qt{display:none;position:absolute;left:0;top:26px;width:min(560px,70vw);background:#fff;border:1px solid #c9d9f2;border-radius:11px;box-shadow:0 6px 24px rgba(23,54,93,.16);padding:12px 14px;font-size:13px;font-weight:400;line-height:1.55;color:var(--ink);text-align:left;z-index:40}
+  .q:hover .qt,.q:focus .qt{display:block}
   @media print{
     .toolbar,.nav,.foot,.editnote{display:none!important}
     .deck{overflow:visible;height:auto}
@@ -281,12 +284,10 @@
 <!-- 10 · MISMA PLATA -->
 <section class="slide">
   <div class="kicker" data-e="kn">Peras con peras · esperado, venta año 20</div>
-  <h2 data-e="tn">Todas con la misma plata</h2>
-  <p class="small" style="margin:6px 0 11px;max-width:1020px" data-e="dn1">Desarrollar compromete <strong>$12.109 MM de plata nueva</strong> (más $4.000 MM de crédito); no hacer nada, cero. Para compararlas de verdad, a cada alternativa se le suma la plata que <em>no</em> usa, invertida a la vara del 5% real. Así <strong>todas comprometen los mismos <span id="capNota2">—</span></strong>.</p>
-  <p class="legend" style="margin:0 0 10px"><span><i class="dot seg1"></i> Lo que produce la alternativa</span><span><i class="dot seg2"></i> Plata sobrante invertida al 5%</span></p>
+  <h2 data-e="tn">Todas con la misma plata: <span id="capNota2">—</span><span class="q" tabindex="0">?<span class="qt" data-e="dn1">Cada alternativa compromete distinta plata: desarrollar exige $12.109 MM nuevos de la familia (más $4.000 MM de crédito); no hacer nada, cero. Para compararlas, a cada una se le suma la plata que no usa, invertida a la vara del 5% real, hasta el mismo año de venta. Así todas comprometen el mismo capital y los totales sí se pueden comparar. El orden resultante es el mismo que da la TIR.</span></span></h2>
+  <p class="legend" style="margin:10px 0 12px"><span><i class="dot seg1"></i> Lo que produce la alternativa</span><span><i class="dot seg2"></i> Plata sobrante invertida al 5%</span></p>
   <div id="bars2"></div>
-  <div class="total" style="margin-top:14px" data-e="dn2"><strong>La conclusión honesta:</strong> desarrollar no transforma $39.899 MM en $85.035 MM. Transforma <strong>$72.029 MM en $85.035 MM</strong> (vía hijos, $85.526 MM). El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia sale al año 5</strong> ($744 MM vía hijos). Es una apuesta de largo plazo, no un cambio de nivel inmediato.</div>
-  <p class="small muted" style="margin-top:7px" data-e="dn3">Ordenado de mayor a menor. La diferencia contra "no hacer nada" aparece a la derecha de cada barra. El orden es el mismo que da la TIR — como debe ser: igualado el capital, total y TIR dicen lo mismo.</p>
+  <div class="total" style="margin-top:16px" data-e="dn2">Desarrollar no transforma $39.899 MM en $85.035 MM: transforma <strong>$72.029 MM en $85.035 MM</strong>. El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia sale al año 5</strong>.</div>
 </section>
 
 <!-- 10 · RIESGOS -->
@@ -468,7 +469,7 @@ document.addEventListener("keydown",e=>{
 });
 
 // ---------- edición ----------
-const LS="pbodemall_slides_edits_r6"; // mapa v3: versiones anteriores ya incorporadas
+const LS="pbodemall_slides_edits_r7"; // mapa v3: versiones anteriores ya incorporadas
 function applyEdits(){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");for(const[id,html]of Object.entries(m)){const el=document.querySelector(`[data-e="${id}"]`);if(el)el.innerHTML=html;}}catch(e){}}
 function saveEdit(el){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");m[el.dataset.e]=el.innerHTML;localStorage.setItem(LS,JSON.stringify(m));}catch(e){}}
 function toggleEdit(){

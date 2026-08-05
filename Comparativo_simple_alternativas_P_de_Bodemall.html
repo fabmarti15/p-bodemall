@@ -44,7 +44,10 @@
   .mtab .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
   .mtab tr.hi td{background:var(--greenbg)}
   .concl{background:#fff;border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:9px 12px}
-  .mnote{font-size:12px!important;color:var(--gray)}
+  .q{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:99px;background:var(--navy);color:#fff;font-size:11px;font-weight:700;cursor:help;position:relative;vertical-align:middle;margin-left:5px;outline:none}
+  .qt{display:none;position:absolute;left:50%;transform:translateX(-50%);top:24px;width:min(460px,78vw);background:#fff;border:1px solid #c9d9f2;border-radius:11px;box-shadow:0 6px 24px rgba(23,54,93,.16);padding:11px 13px;font-size:12.5px;font-weight:400;line-height:1.55;color:var(--ink);text-align:left;z-index:30}
+  .q:hover .qt,.q:focus .qt{display:block}
+  @media print{.qt{display:block;position:static;transform:none;width:auto;box-shadow:none;margin-top:6px}.q{display:block;width:auto;height:auto;background:none;color:var(--navy)}}
   .same{font-size:12.5px;color:var(--navy);background:var(--bluebg);border-radius:7px;padding:3px 8px;display:inline-block;margin-top:5px}
   .foot{font-size:12px;color:var(--gray);margin-top:18px;line-height:1.5}
   .foot a{color:#2456a6}
@@ -76,12 +79,8 @@
 <h1 data-e="t">P de Bodemall — las 7 alternativas en una página</h1>
 <p class="sub" data-e="s">Caso esperado · familia completa · venta hipotética año 20 · UF $40.000 · vara: 5% real (5% + inflación). La P es del vecino (Avayu/Indumotora): comprarla es plata que sale de la familia. El 0% de Paco se asume vigente solo 5 años más.</p>
 <p class="linkbar" data-e="lk">Detalle completo: <a href="Presentacion_slides_directorio_P_de_Bodemall.html">abrir la presentación del directorio →</a></p>
-<p class="hint" data-e="h">Pasa el mouse (o toca en el celular) sobre cada punto ● para ver la explicación completa.</p>
-
 <div class="samebox">
-  <h2 data-e="mp0">Antes de mirar los totales: peras con peras</h2>
-  <p data-e="mp1">Los "Total familia" de cada alternativa <strong>no son comparables entre sí</strong>, porque cada una compromete distinta plata. Desarrollar exige <strong>$12.109 MM nuevos de la familia</strong> (más $4.000 MM de crédito); no hacer nada no exige nada. Un total más grande puede ser solo plata más grande, no mejor negocio.</p>
-  <p data-e="mp2">Para igualarlas, a cada alternativa se le suma la plata que <em>no</em> usa, invertida en la vara (5% real). Así <strong>las siete comprometen los mismos $24.509 MM</strong> y los totales sí se pueden comparar:</p>
+  <h2 data-e="mp0">Todas con la misma plata: $24.509 MM<span class="q" tabindex="0">?<span class="qt" data-e="mp1">Los "Total familia" no son comparables entre sí: cada alternativa compromete distinta plata. Desarrollar exige $12.109 MM nuevos de la familia (más $4.000 MM de crédito); no hacer nada, cero. Un total más grande puede ser solo plata más grande, no mejor negocio. Para igualarlas, a cada una se le suma la plata que no usa, invertida en la vara (5% real): así las siete comprometen los mismos $24.509 MM.</span></span></h2>
   <table class="mtab">
     <thead><tr><th>Alternativa</th><th class="n">Plata nueva</th><th class="n">Total con la misma plata</th><th class="n">vs no hacer nada</th></tr></thead>
     <tbody>
@@ -94,8 +93,7 @@
       <tr><td data-e="mr1">1 · Vender todo ahora</td><td class="n" data-e="mr1a">—</td><td class="n"><strong data-e="mr1b">$58.374 MM</strong></td><td class="n neg" data-e="mr1c">−$13.655 MM</td></tr>
     </tbody>
   </table>
-  <p class="concl" data-e="mp3"><strong>La conclusión honesta:</strong> desarrollar no transforma $39.899 MM en $85.035 MM. Transforma <strong>$72.029 MM en $85.035 MM</strong>. El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia vende al año 5</strong> ($744 MM vía hijos). Es una apuesta de largo plazo.</p>
-  <p class="mnote" data-e="mp4">Ordenado igual que la TIR, como corresponde: con el capital igualado, el total y la TIR dicen lo mismo. Cada fila de abajo repite su "misma plata".</p>
+  <p class="concl" data-e="mp3">El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si se vende al año 5</strong>.<span class="q" tabindex="0">?<span class="qt" data-e="mp4">Desarrollar no transforma $39.899 MM en $85.035 MM: transforma $72.029 MM en $85.035 MM (vía hijos, $85.526 MM). A 5 años la ventaja cae a $252 MM ($744 MM vía hijos). Es una apuesta de largo plazo, no un cambio de nivel inmediato. El orden de la tabla es el mismo que da la TIR: con el capital igualado, total y TIR dicen lo mismo.</span></span></p>
 </div>
 
 <div class="row worst">
@@ -233,7 +231,7 @@ document.querySelectorAll(".step").forEach(s=>{
     s.classList.toggle("open");
   });
 });
-const LS="pbodemall_comparativo_edits_4"; // mapa v3: ediciones anteriores ya incorporadas
+const LS="pbodemall_comparativo_edits_5"; // mapa v3: ediciones anteriores ya incorporadas
 function applyEdits(){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");for(const[id,html]of Object.entries(m)){const el=document.querySelector(`[data-e="${id}"]`);if(el)el.innerHTML=html;}}catch(e){}}
 function saveEdit(el){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");m[el.dataset.e]=el.innerHTML;localStorage.setItem(LS,JSON.stringify(m));}catch(e){}}
 function toggleEdit(){
