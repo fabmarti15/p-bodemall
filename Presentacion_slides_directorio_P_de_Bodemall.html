@@ -282,11 +282,11 @@
 <section class="slide">
   <div class="kicker" data-e="kn">Peras con peras · esperado, venta año 20</div>
   <h2 data-e="tn">Todas con la misma plata</h2>
-  <p class="small" style="margin:8px 0 14px;max-width:1020px" data-e="dn1">Desarrollar compromete <strong>$12.109 MM de plata nueva</strong> (más $4.000 MM de crédito); no hacer nada, cero. Para compararlas de verdad, a cada alternativa se le suma la plata que <em>no</em> usa, invertida a la vara del 5% real. Así <strong>todas comprometen los mismos <span id="capNota2">—</span></strong>.</p>
-  <p class="legend" style="margin:0 0 14px"><span><i class="dot seg1"></i> Lo que produce la alternativa</span><span><i class="dot seg2"></i> Plata sobrante invertida al 5%</span></p>
+  <p class="small" style="margin:6px 0 11px;max-width:1020px" data-e="dn1">Desarrollar compromete <strong>$12.109 MM de plata nueva</strong> (más $4.000 MM de crédito); no hacer nada, cero. Para compararlas de verdad, a cada alternativa se le suma la plata que <em>no</em> usa, invertida a la vara del 5% real. Así <strong>todas comprometen los mismos <span id="capNota2">—</span></strong>.</p>
+  <p class="legend" style="margin:0 0 10px"><span><i class="dot seg1"></i> Lo que produce la alternativa</span><span><i class="dot seg2"></i> Plata sobrante invertida al 5%</span></p>
   <div id="bars2"></div>
   <div class="total" style="margin-top:14px" data-e="dn2"><strong>La conclusión honesta:</strong> desarrollar no transforma $39.899 MM en $85.035 MM. Transforma <strong>$72.029 MM en $85.035 MM</strong> (vía hijos, $85.526 MM). El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia sale al año 5</strong> ($744 MM vía hijos). Es una apuesta de largo plazo, no un cambio de nivel inmediato.</div>
-  <p class="small muted" style="margin-top:10px" data-e="dn3">Ordenado de mayor a menor. La diferencia contra "no hacer nada" aparece a la derecha de cada barra. El orden es el mismo que da la TIR — como debe ser: igualado el capital, total y TIR dicen lo mismo.</p>
+  <p class="small muted" style="margin-top:7px" data-e="dn3">Ordenado de mayor a menor. La diferencia contra "no hacer nada" aparece a la derecha de cada barra. El orden es el mismo que da la TIR — como debe ser: igualado el capital, total y TIR dicen lo mismo.</p>
 </section>
 
 <!-- 10 · RIESGOS -->
@@ -447,8 +447,8 @@ function renderBars2(){
     const w=v=>(v/max*100).toFixed(2)+"%";
     const dif=k==="nada"?'<span class="muted tiny">referencia</span>'
       :`<span class="tiny ${n.dif>=0?"pos":"neg"}" style="font-weight:700">${n.dif>=0?"+":"−"}${fMM(Math.abs(n.dif))}</span>`;
-    return`<div style="margin-bottom:13px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+    return`<div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
         <span style="font-size:14px"><strong>${NAMES[k]}</strong> <span class="muted tiny">TIR ${fPct(r[3])}</span></span>
         <span style="font-size:14px"><strong>${fMM(n.comp)}</strong> &nbsp;${dif}</span></div>
       <div class="bar"><div class="seg1" style="width:${w(r[4])}" title="La alternativa produce ${fMM(r[4])}"></div><div class="seg2" style="width:${w(n.resto)}" title="Plata sobrante al 5%: ${fMM(n.resto)}"></div></div>
