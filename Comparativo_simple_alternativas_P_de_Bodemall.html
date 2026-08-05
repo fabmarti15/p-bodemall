@@ -47,6 +47,7 @@
   .q{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border-radius:99px;background:var(--navy);color:#fff;font-size:11px;font-weight:700;cursor:help;position:relative;vertical-align:middle;margin-left:5px;outline:none}
   .qt{display:none;position:absolute;left:50%;transform:translateX(-50%);top:24px;width:min(460px,78vw);background:#fff;border:1px solid #c9d9f2;border-radius:11px;box-shadow:0 6px 24px rgba(23,54,93,.16);padding:11px 13px;font-size:12.5px;font-weight:400;line-height:1.55;color:var(--ink);text-align:left;z-index:30}
   .q:hover .qt,.q:focus .qt{display:block}
+  .qt-l{left:0;transform:none;width:min(420px,74vw)}
   @media print{.qt{display:block;position:static;transform:none;width:auto;box-shadow:none;margin-top:6px}.q{display:block;width:auto;height:auto;background:none;color:var(--navy)}}
   .same{font-size:12.5px;color:var(--navy);background:var(--bluebg);border-radius:7px;padding:3px 8px;display:inline-block;margin-top:5px}
   .foot{font-size:12px;color:var(--gray);margin-top:18px;line-height:1.5}
@@ -101,7 +102,7 @@
     <div class="name" data-e="a1">1 · Vender todo ahora</div>
     <div class="tir neg" data-e="a1t">TIR 3,8% <small>(a 5 años: 0,4%)</small></div>
     <div class="total" data-e="a1x">Total familia: $26.244 MM</div>
-    <div class="same" data-e="a1s">Misma plata: <strong>$58.374 MM</strong> · <span class="neg">−$13.655 MM</span></div>
+    <div class="same" data-e="a1s">Misma plata: <strong>$58.374 MM</strong> · <span class="neg">−$13.655 MM</span><span class="q" tabindex="0">?<span class="qt qt-l" data-e="a1z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. Desarrollar la P pide $12.109 MM de plata nueva; esta alternativa no pide plata nueva, así que los $12.109 MM quedan en el banco. Esos $12.109 MM guardados al 5% real llegan a $32.130 MM en 20 años. Entonces la familia termina con $26.244 MM de esta alternativa + $32.130 MM del banco = <strong>$58.374 MM</strong>. Es $13.655 MM menos que no hacer nada.</span></span></div>
     <span class="badge b-no" data-e="a1b">NO SUPERA EL 5%</span>
   </div>
   <div class="tl">
@@ -119,7 +120,7 @@
     <div class="name" data-e="a2">2 · No hacer nada</div>
     <div class="tir" data-e="a2t">TIR 6,0% <small>(a 5 años: 4,0%)</small></div>
     <div class="total" data-e="a2x">Total familia: $39.899 MM</div>
-    <div class="same" data-e="a2s">Misma plata: <strong>$72.029 MM</strong> · referencia</div>
+    <div class="same" data-e="a2s">Misma plata: <strong>$72.029 MM</strong> · referencia<span class="q" tabindex="0">?<span class="qt qt-l" data-e="a2z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. No hacer nada no pide ni un peso, así que los $12.109 MM que exigiría desarrollar quedan en el banco al 5% real y llegan a $32.130 MM en 20 años. La familia termina con $39.899 MM de Bodemall + $32.130 MM del banco = <strong>$72.029 MM</strong>. Esta es la vara a vencer: cualquier proyecto tiene que dejar más que esto.</span></span></div>
     <span class="badge b-ok" data-e="a2b">SUPERA EL 5% A 20 AÑOS</span>
   </div>
   <div class="tl">
@@ -137,7 +138,7 @@
     <div class="name" data-e="a3">3 · Comprar la P y esperar · empresa</div>
     <div class="tir" data-e="a3t">TIR 4,9% <small>(a 5 años: 3,2%)</small></div>
     <div class="total" data-e="a3x">Total familia: $46.267 MM · plata nueva $5.493 MM</div>
-    <div class="same" data-e="a3s">Misma plata: <strong>$63.822 MM</strong> · <span class="neg">−$8.207 MM</span></div>
+    <div class="same" data-e="a3s">Misma plata: <strong>$63.822 MM</strong> · <span class="neg">−$8.207 MM</span><span class="q" tabindex="0">?<span class="qt qt-l" data-e="a3z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. Desarrollar la P pide $12.109 MM de plata nueva; esta alternativa pide $5.493 MM, así que sobran $6.616 MM. Esos $6.616 MM guardados al 5% real llegan a $17.555 MM en 20 años. Entonces la familia termina con $46.267 MM de esta alternativa + $17.555 MM del banco = <strong>$63.822 MM</strong>. Es $8.207 MM menos que no hacer nada.</span></span></div>
     <span class="badge b-no" data-e="a3b">NO SUPERA EL 5%</span>
   </div>
   <div class="tl">
@@ -155,7 +156,7 @@
     <div class="name" data-e="a4">4 · Comprar la P y esperar · hijos</div>
     <div class="tir" data-e="a4t">TIR 4,9% <small>(a 5 años: 3,4%)</small></div>
     <div class="total" data-e="a4x">Total familia: $46.877 MM · plata nueva $5.493 MM</div>
-    <div class="same" data-e="a4s">Misma plata: <strong>$64.432 MM</strong> · <span class="neg">−$7.597 MM</span></div>
+    <div class="same" data-e="a4s">Misma plata: <strong>$64.432 MM</strong> · <span class="neg">−$7.597 MM</span><span class="q" tabindex="0">?<span class="qt qt-l" data-e="a4z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. Desarrollar la P pide $12.109 MM de plata nueva; esta alternativa pide $5.493 MM, así que sobran $6.616 MM. Esos $6.616 MM guardados al 5% real llegan a $17.555 MM en 20 años. Entonces la familia termina con $46.877 MM de esta alternativa + $17.555 MM del banco = <strong>$64.432 MM</strong>. Es $7.597 MM menos que no hacer nada.</span></span></div>
     <span class="badge b-no" data-e="a4b">NO SUPERA EL 5%</span>
   </div>
   <div class="tl">
@@ -173,7 +174,7 @@
     <div class="name" data-e="a5">5 · Comprar la P y desarrollar · empresa</div>
     <div class="tir pos" data-e="a5t">TIR 6,4% <small>(a 5 años: 4,7%)</small></div>
     <div class="total" data-e="a5x">Total familia: $85.035 MM · plata nueva $12.109 MM</div>
-    <div class="same" data-e="a5s">Misma plata: <strong>$85.035 MM</strong> · <span class="pos">+$13.006 MM</span></div>
+    <div class="same" data-e="a5s">Misma plata: <strong>$85.035 MM</strong> · <span class="pos">+$13.006 MM</span><span class="q" tabindex="0">?<span class="qt qt-l" data-e="a5z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. Esta es la que más plata pide ($12.109 MM), así que no le sobra nada para guardar: su total ya es el comparable. Frente a no hacer nada ($72.029 MM), deja <strong>$13.006 MM más</strong> en 20 años.</span></span></div>
     <span class="badge b-ok" data-e="a5b">SUPERA EL 5% A 20 AÑOS</span>
   </div>
   <div class="tl">
@@ -191,7 +192,7 @@
     <div class="name" data-e="a6">6 · Comprar la P y desarrollar · hijos ⭐</div>
     <div class="tir pos" data-e="a6t">TIR 6,5% <small>(a 5 años: 5,0%)</small></div>
     <div class="total" data-e="a6x">Total familia: $85.526 MM · plata nueva $12.109 MM</div>
-    <div class="same" data-e="a6s">Misma plata: <strong>$85.526 MM</strong> · <span class="pos">+$13.497 MM</span></div>
+    <div class="same" data-e="a6s">Misma plata: <strong>$85.526 MM</strong> · <span class="pos">+$13.497 MM</span><span class="q" tabindex="0">?<span class="qt qt-l" data-e="a6z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. Igual que la anterior: pide los $12.109 MM completos, no le sobra nada para guardar. Frente a no hacer nada ($72.029 MM), deja <strong>$13.497 MM más</strong> en 20 años — la mejor de las siete.</span></span></div>
     <span class="badge b-ok" data-e="a6b">LA MEJOR A 20 AÑOS</span>
   </div>
   <div class="tl">
@@ -209,7 +210,7 @@
     <div class="name" data-e="a7">7 · Desarrollar con socio 50/50</div>
     <div class="tir" data-e="a7t">TIR 5,8% <small>(a 5 años: 3,1%)</small></div>
     <div class="total" data-e="a7x">Total familia: $43.596 MM · plata nueva $255 MM + $1.350 MM de impuesto de Paco</div>
-    <div class="same" data-e="a7s">Misma plata: <strong>$71.468 MM</strong> · <span class="neg">−$561 MM</span></div>
+    <div class="same" data-e="a7s">Misma plata: <strong>$71.468 MM</strong> · <span class="neg">−$561 MM</span><span class="q" tabindex="0">?<span class="qt qt-l" data-e="a7z">Imagínalo como dos hermanos que parten con la misma plata en el bolsillo: cada alternativa pide poner distinta cantidad, y la que pide menos deja plata guardada en el banco ganando 5% al año. Esa plata guardada también hay que contarla, o estaríamos comparando un bolsillo grande con uno chico. Desarrollar la P pide $12.109 MM de plata nueva; esta alternativa pide $1.605 MM, así que sobran $10.504 MM. Esos $10.504 MM guardados al 5% real llegan a $27.872 MM en 20 años. Entonces la familia termina con $43.596 MM de esta alternativa + $27.872 MM del banco = <strong>$71.468 MM</strong>. Es $561 MM menos que no hacer nada.</span></span></div>
     <span class="badge b-ok" data-e="a7b">SUPERA EL 5% · PACO PIERDE SU 0%</span>
   </div>
   <div class="tl">
@@ -231,7 +232,7 @@ document.querySelectorAll(".step").forEach(s=>{
     s.classList.toggle("open");
   });
 });
-const LS="pbodemall_comparativo_edits_5"; // mapa v3: ediciones anteriores ya incorporadas
+const LS="pbodemall_comparativo_edits_6"; // mapa v3: ediciones anteriores ya incorporadas
 function applyEdits(){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");for(const[id,html]of Object.entries(m)){const el=document.querySelector(`[data-e="${id}"]`);if(el)el.innerHTML=html;}}catch(e){}}
 function saveEdit(el){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");m[el.dataset.e]=el.innerHTML;localStorage.setItem(LS,JSON.stringify(m));}catch(e){}}
 function toggleEdit(){
