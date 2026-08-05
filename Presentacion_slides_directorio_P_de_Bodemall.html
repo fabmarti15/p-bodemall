@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>P de Bodemall — Directorio</title>
+<style>
+  :root{
+    --navy:#17365D; --ink:#1c2430; --gray:#66707d; --line:#e3e8ee;
+    --green:#1a7a40; --greenbg:#e9f5ee; --red:#b3261e; --redbg:#fbeae9;
+    --amber:#8a6d00; --amberbg:#fdf6dd; --blue:#2456a6; --bluebg:#edf3fc;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff}
+  .deck{height:100%;position:relative;overflow:hidden}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;padding:50px 66px 76px;background:#fff;overflow:auto}
+  .slide.on{display:flex}
+  .kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:10px}
+  h1{font-size:44px;font-weight:700;color:var(--navy);line-height:1.15}
+  h2{font-size:28px;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .sub{font-size:15.5px;color:var(--gray);margin-bottom:20px}
+  p,li,td,th{font-size:15px;line-height:1.5}
+  .chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:99px;vertical-align:middle}
+  .c-ok{background:var(--greenbg);color:var(--green)} .c-sup{background:var(--amberbg);color:var(--amber)} .c-pen{background:var(--redbg);color:var(--red)}
+  .grid{display:grid;gap:16px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:17px 19px;background:#fff}
+  .card h3{font-size:16.5px;color:var(--navy);margin-bottom:7px}
+  .big{font-size:27px;font-weight:700;color:var(--navy)}
+  .muted{color:var(--gray)} .small{font-size:13px} .tiny{font-size:12px}
+  table{border-collapse:collapse;width:100%}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+  td{padding:8px 10px;border-bottom:1px solid var(--line)}
+  .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pos{color:var(--green);font-weight:600} .neg{color:var(--red)}
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .toggle button{border:0;background:#fff;padding:8px 16px;font-size:14px;cursor:pointer;color:var(--gray)}
+  .toggle button.sel{background:var(--navy);color:#fff}
+  .toolbar{position:fixed;top:14px;right:16px;z-index:50;display:flex;gap:8px}
+  .toolbar button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 13px;font-size:13px;cursor:pointer;color:var(--ink)}
+  .toolbar button:hover{border-color:var(--navy)}
+  .toolbar button.active{background:var(--amberbg);border-color:var(--amber);color:var(--amber);font-weight:700}
+  .nav{position:fixed;bottom:16px;right:16px;z-index:50;display:flex;align-items:center;gap:10px}
+  .nav button{border:1px solid var(--line);background:#fff;border-radius:9px;width:38px;height:34px;font-size:16px;cursor:pointer}
+  .pager{font-size:13px;color:var(--gray);font-variant-numeric:tabular-nums}
+  .foot{position:fixed;bottom:18px;left:24px;font-size:12px;color:#a7afb9;z-index:40}
+  .editing [data-e]{outline:1.5px dashed #d9a800;outline-offset:3px;border-radius:3px;min-height:1em}
+  .editnote{display:none;position:fixed;top:14px;left:16px;z-index:50;background:var(--amberbg);color:var(--amber);font-size:13px;padding:8px 12px;border-radius:9px}
+  .bar{display:flex;height:24px;border-radius:7px;overflow:hidden;background:#f2f4f7}
+  .seg1{background:#2456a6} .seg2{background:#7ba3dd}
+  .legend span{display:inline-flex;align-items:center;gap:6px;margin-right:18px;font-size:13px;color:var(--gray)}
+  .dot{width:11px;height:11px;border-radius:3px;display:inline-block}
+  ul{padding-left:22px} li{margin-bottom:8px}
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .cols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .hl{background:var(--bluebg);border-radius:6px;padding:1px 5px}
+  .tl{list-style:none;padding:0;margin-top:6px}
+  .tl li{position:relative;padding-left:24px;margin-bottom:9px;font-size:14px}
+  .tl li::before{content:"";position:absolute;left:5px;top:7px;width:9px;height:9px;border-radius:99px;background:var(--navy)}
+  .tl li::after{content:"";position:absolute;left:9px;top:18px;bottom:-7px;width:1.5px;background:var(--line)}
+  .tl li:last-child::after{display:none}
+  .tl .when{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:block}
+  .total{background:var(--bluebg);border-radius:10px;padding:9px 13px;margin-top:6px;font-size:14.5px}
+  @media print{
+    .toolbar,.nav,.foot,.editnote{display:none!important}
+    .deck{overflow:visible;height:auto}
+    .slide{display:flex!important;position:relative;page-break-after:always;height:100vh;overflow:hidden}
+  }
+</style>
+</head>
+<body>
+<div class="editnote" id="editnote">Modo edición: haz clic en cualquier texto y escribe. Los cambios se guardan en este navegador. «Descargar copia» genera el archivo con tus cambios.</div>
+<div class="toolbar">
+  <button id="btnEdit" onclick="toggleEdit()">✎ Editar</button>
+  <button onclick="downloadCopy()">⬇ Descargar copia</button>
+  <button onclick="resetEdits()">Restablecer</button>
+  <button onclick="window.print()">Imprimir</button>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- 1 · PORTADA -->
+<section class="slide on">
+  <div style="margin:auto 0">
+    <h1 data-e="t1">P de Bodemall<br>Evaluación de la inversión</h1>
+    <p class="sub" style="margin-top:18px" data-e="s1"></p>
+  </div>
+</section>
+
+<!-- 2 · CÓMO ESTÁ ARMADO HOY -->
+<section class="slide">
+  <div class="kicker" data-e="k2">El punto de partida</div>
+  <h2 data-e="t2">Qué tenemos y cuál es la oportunidad</h2>
+  <p class="sub" data-e="s2">Lo nuestro vale $12.400 MM según la oferta recibida. La P es del vecino y está a la venta: esa es la decisión.</p>
+  <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="card" style="border-top:4px solid var(--green)">
+      <h3 data-e="d2a">El terreno de Bodemall — de Paco</h3>
+      <div class="big" data-e="d2b">$4.152 MM</div>
+      <p class="muted" data-e="d2c">Comprado antes de 2004: vendido a un tercero, su ganancia paga $0. Asumimos (conservador) que ese beneficio dura solo 5 años más.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--blue)">
+      <h3 data-e="d2d">Las bodegas y el negocio — de la empresa</h3>
+      <div class="big" data-e="d2e">$8.248 MM</div>
+      <p class="muted" data-e="d2f">Renta ~2.000 UF/mes ($866 MM/año netos), 32 clientes. Valor libro: $3.022 MM (balance jun-2026) — al vender, la diferencia paga ~44%.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--amber)">
+      <h3 data-e="d2g">LA P — del vecino (Avayu / Indumotora)</h3>
+      <div class="big" data-e="d2h">45.099,8 m² · $5.412 MM</div>
+      <p class="muted" data-e="d2i">Se puede comprar a 3 UF/m². Unida a nuestro paño vale más (3,3 UF/m² esperado) y permite construir 24.128 m² de bodegas nuevas.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px;background:var(--bluebg);border-color:#c9d9f2">
+    <p data-e="d2j"><strong>Las posibilidades:</strong> vender todo ahora · no hacer nada · comprar la P para esperar · comprar la P y desarrollar (solos o con socio). Todo medido como familia completa contra tener la plata al <strong>5% real</strong> (5% + inflación) en Banchile/Falcon.</p>
+  </div>
+</section>
+
+<!-- 3 · TRIBUTARIO -->
+<section class="slide">
+  <div class="kicker" data-e="k3">Lo tributario, en simple</div>
+  <h2 data-e="t3">Tres reglas mandan el análisis</h2>
+  <p class="sub" data-e="s3">Comprarle la P a Avayu no paga impuestos hoy (es una compra a un tercero). Lo que importa es cómo tributa cada cosa al VENDER.</p>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="border-top:4px solid var(--green)">
+      <h3 data-e="d3a">Terreno de Paco: 0% con fecha de vencimiento</h3>
+      <div class="big" data-e="d3b">$0 por ~5 años más</div>
+      <p class="muted" data-e="d3c">Vendiendo a un tercero, su ganancia paga $0 (compró pre-2004). Supuesto conservador: la ventana dura 5 años; después paga 10%. Y se pierde altiro si lo aporta a una sociedad nuestra: ~$1.350 MM (estimación Guerrero).</p>
+      <p class="small" style="margin-top:10px"><span class="chip c-ok">CONFIRMADO HOY</span> <span class="chip c-sup">VENTANA: SUPUESTO</span></p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--blue)">
+      <h3 data-e="d3e">La P: el impuesto futuro depende de quién compre</h3>
+      <div class="big" data-e="d3f">44,45% empresa · 10% hijos</div>
+      <p class="muted" data-e="d3g">Si la compra una sociedad, la ganancia futura paga impuesto de empresa más el retiro (~44,45%: 27% por la venta + impuestos de persona al retirar). Si compran los hijos como personas, pagan 10% único.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--red)">
+      <h3 data-e="d3i">Las bodegas: siempre pagan por su ganancia contable</h3>
+      <div class="big" data-e="d3j">~44% sobre valor libro</div>
+      <p class="muted" data-e="d3k">En los libros valen $3.022 MM y el mercado paga mucho más: esa diferencia tributa al vender, hoy o en 20 años. Vender hoy adelanta $2.323 MM.</p>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:14px" data-e="d3m">Nota: la reforma en trámite bajaría el impuesto de empresas de 27% a 23% hacia 2029 (aún es proyecto). No cambia el orden de los caminos.</p>
+</section>
+
+<!-- 4 · RESULTADOS -->
+<section class="slide">
+  <div class="kicker" data-e="k5">Resultados</div>
+  <h2 data-e="t5">Siete formas de jugar la misma mano</h2>
+  <div style="display:flex;gap:14px;align-items:center;margin:8px 0 6px">
+    <div class="toggle" id="tgScen">
+      <button data-v="pess" onclick="setScen('pess')">Pesimista</button>
+      <button data-v="base" class="sel" onclick="setScen('base')">Esperado</button>
+      <button data-v="opt" onclick="setScen('opt')">Optimista</button>
+    </div>
+    <div class="toggle" id="tgHor">
+      <button data-v="5" onclick="setHor(5)">Venta año 5</button>
+      <button data-v="20" class="sel" onclick="setHor(20)">Venta año 20</button>
+    </div>
+  </div>
+  <p class="tiny muted" style="margin-bottom:12px" data-e="d5b"><strong>Qué cambia entre escenarios</strong> — Pesimista: valores no suben, la P unida vale lo que costó (3 UF/m²), bodegas nuevas se arriendan lento (20%→50%→90%), obra +15%, cap 9%. Esperado: plusvalía 1% real anual, P unida vale 3,3, ocupación 30%→70%→95%, cap 8%. Optimista: plusvalía 2%, P unida 3,6, ocupación 100%, obra −5%, cap 7%. La vara es 5% real en todos.</p>
+  <table id="resTable">
+    <thead><tr>
+      <th>Alternativa</th><th class="num">TIR</th><th class="num">Total familia</th><th class="num">Misma plata</th><th class="num">Impuestos hoy</th><th class="num">Impuesto al vender</th><th class="num">Plata nueva</th><th>vs 5%</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table>
+  <p class="small muted" style="margin-top:10px" data-e="d5a"><strong>Total familia</strong> = venta neta + caja acumulada; no es comparable entre filas porque cada alternativa compromete distinta plata. <strong>Misma plata</strong> sí lo es: a la alternativa que usa menos capital se le suma lo que no usó, invertido a la vara (5% real), de modo que todas comprometen <strong id="capNota">—</strong>; abajo, la diferencia contra "no hacer nada". "Impuestos hoy": el de las bodegas si se vende ahora, o el de Paco si Bodemall se aporta a la sociedad con socio. Todo en $MM (UF entre paréntesis). Detalle en las láminas siguientes · <a href="Comparativo_simple_alternativas_P_de_Bodemall.html" style="color:#2456a6">versión ultra simple en una página →</a></p>
+</section>
+
+<!-- 5 · DETALLE VENDER vs NADA -->
+<section class="slide">
+  <div class="kicker" data-e="kv">Detalle 1 de 3 · caso esperado, venta año 20</div>
+  <h2 data-e="tv">Vender todo ahora vs no hacer nada</h2>
+  <p class="sub" data-e="sv">Vender hoy adelanta el impuesto grande de las bodegas y apaga la renta. Esperar mantiene la vaca lechera — con la ventana de Paco corriendo.</p>
+  <div class="cols2">
+    <div class="card" style="border-top:4px solid var(--red)">
+      <h3 data-e="v1">Vender todo ahora — TIR 3,8%</h3>
+      <ul class="tl">
+        <li data-e="v2"><span class="when">Hoy</span>Se vende todo en <strong>$12.400 MM</strong>. Venta de terreno no paga impuestos (ventana vigente), pero las bodegas pagan <strong>$2.323 MM</strong> altiro. Quedan $9.891 MM.</li>
+        <li data-e="v3"><span class="when">Años 1 a 20</span>La plata trabaja al 5% real. Se acaba el flujo por los arriendos.</li>
+        <li data-e="v4"><span class="when">Año 20</span>La bolsa llega a <strong>$26.244 MM</strong>. A 5 años la TIR es solo 0,4%.</li>
+      </ul>
+      <div class="total" data-e="v5">El impuesto pagado el día 1 deja de trabajar 20 años. La peor alternativa en todos los escenarios.</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--green)">
+      <h3 data-e="v6">No hacer nada — TIR 6,0%</h3>
+      <ul class="tl">
+        <li data-e="v7"><span class="when">Hoy</span>Cero movimiento, cero impuesto. La P queda en manos del vecino.</li>
+        <li data-e="v8"><span class="when">Años 1 a 20</span>Bodemall rinde <strong>$866 MM/año</strong>, acumulados al 5% → $28.632 MM de caja.</li>
+        <li data-e="v9"><span class="when">Año 20 · venta</span>El terreno de Paco ya perdió su 0% (ventana de 5 años): paga $507 MM. Bodegas: $3.130 MM. Venta neta $11.267 MM.</li>
+      </ul>
+      <div class="total" data-e="v10">Total: <strong>$39.899 MM</strong> vs $26.244 de vender hoy. Supera la vara a 20 años (6,0%) — pero renuncia a la P y a crecer.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · DETALLE COMPRAR Y ESPERAR -->
+<section class="slide">
+  <div class="kicker" data-e="km">Detalle 2 de 3 · caso esperado, venta año 20</div>
+  <h2 data-e="tm">Comprar la P y esperar — la banca de terreno</h2>
+  <p class="sub" data-e="sm">Se le compra la P a Avayu en $5.412 MM (+gastos) y no se construye. La gracia: se compra a 3 UF/m² algo que unido al paño vale 3,3. El problema: un terreno vacío no paga sus propios años de espera.</p>
+  <div class="cols2">
+    <div class="card" style="border-top:4px solid var(--red)">
+      <h3 data-e="m1">Vía sociedad (empresa) — TIR 4,9%</h3>
+      <ul class="tl">
+        <li data-e="m2"><span class="when">Hoy</span>Plata nueva: <strong>$5.493 MM</strong>. Comprar a un tercero no paga impuestos.</li>
+        <li data-e="m3"><span class="when">Años 1 a 20</span>La P vacía solo acumula plusvalía (1% real/año). Bodemall sigue igual.</li>
+        <li data-e="m4"><span class="when">Año 20 · venta</span>El conjunto se vende en ~$22.395 MM. La ganancia de la P paga ~44%: impuestos totales <strong>$4.424 MM</strong>.</li>
+      </ul>
+      <div class="total" data-e="m5">Total familia: <strong>$46.267 MM</strong>. No supera el 5%.</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--blue)">
+      <h3 data-e="m6">Vía hijos (personas) — TIR 4,9%</h3>
+      <ul class="tl">
+        <li data-e="m7"><span class="when">Hoy</span>Misma compra, pero la P queda a nombre de los hijos.</li>
+        <li data-e="m8"><span class="when">Años 1 a 20</span>Idéntico al lado.</li>
+        <li data-e="m9"><span class="when">Año 20 · venta</span>La ganancia de la P paga solo 10%: impuestos <strong>$3.814 MM</strong> ($610 MM menos).</li>
+      </ul>
+      <div class="total" data-e="m10">Total familia: <strong>$46.877 MM</strong>. Mejor que vía empresa, pero tampoco supera el 5%.</div>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:12px" data-e="m11"><strong>Lectura:</strong> comprar barato no basta — el descuento de la compra y la plusvalía se los comen los impuestos, los gastos y 20 años de espera sin renta. Solo tiene sentido si es el paso previo a desarrollar (lámina siguiente) o para que nadie más se instale al lado.</p>
+</section>
+
+<!-- 7 · DETALLE DESARROLLAR -->
+<section class="slide">
+  <div class="kicker" data-e="kd">Detalle 3 de 3 · caso esperado, venta año 20</div>
+  <h2 data-e="td">Comprar la P y desarrollar — la única que crea renta</h2>
+  <p class="sub" data-e="sd">Común a los tres: comprar la P a Avayu + obra de $10.616 MM en 3 años (24.128 m²), crédito de $4.000 MM, bodegas llenándose (30% → 70% → 95%). Desde el año 4 el arriendo total llega a ~$2.270 MM/año.</p>
+  <div class="cols3">
+    <div class="card">
+      <h3 data-e="b1">Solos · empresa — TIR 6,4%</h3>
+      <ul class="tl">
+        <li data-e="b2"><span class="when">Hoy</span>Plata nueva <strong>$12.109 MM</strong> + gerente $5 MM/mes por 3 años. Sin impuestos hoy.</li>
+        <li data-e="b3"><span class="when">Año 20</span>Venta por renta $28.359 MM; impuestos $2.356 MM.</li>
+      </ul>
+      <div class="total" data-e="b4">Total: <strong>$85.035 MM</strong>. Supera el 5% a 20 años.</div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--green)">
+      <h3 data-e="b5">Solos · hijos — TIR 6,5% ⭐</h3>
+      <ul class="tl">
+        <li data-e="b6"><span class="when">Hoy</span>Misma plata y gerente; la P y lo construido a nombre de los hijos.</li>
+        <li data-e="b7"><span class="when">Año 20</span>Lo nuevo paga solo 10%: impuestos <strong>$1.865 MM</strong> ($491 MM menos; $2.166 MM menos si va bien).</li>
+      </ul>
+      <div class="total" data-e="b8">Total: <strong>$85.526 MM</strong>. La mejor a 20 años y la única que empata la vara ya al año 5 (5,0%).</div>
+    </div>
+    <div class="card">
+      <h3 data-e="b9">Con socio 50/50 — TIR 5,8%</h3>
+      <ul class="tl">
+        <li data-e="b10"><span class="when">Hoy</span>La familia aporta Bodemall completo; el socio financia la P y la obra. La familia pone solo $255 MM, pero <strong>Paco paga $1.350 MM</strong> por aportar su terreno a la sociedad.</li>
+        <li data-e="b11"><span class="when">Año 20</span>A la familia le toca el 50%.</li>
+      </ul>
+      <div class="total" data-e="b12">Total: <strong>$43.596 MM</strong>. Supera la vara sin poner casi plata — a cambio de media vaca y del 0% de Paco.</div>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:12px" data-e="b13"><strong>Por qué desarrollar gana:</strong> es la única alternativa donde la P produce renta en vez de solo esperar plusvalía. La inversión nueva además descuenta la ganancia tributable: el impuesto de salida es menor que en cualquier otra compra.</p>
+</section>
+
+<!-- 8 · LECTURA -->
+<section class="slide">
+  <div class="kicker" data-e="k6">Lectura · caso esperado</div>
+  <h2 data-e="t6">Qué dicen los números</h2>
+  <ul style="margin-top:14px;max-width:1020px">
+    <li data-e="l6a"><strong>Desarrollar es lo único que supera la vara del 5% con un proyecto real</strong>: TIR 6,4–6,5% a 20 años (~$85.000 MM). Vía hijos es la mejor y la única que ya empata la vara al año 5 (5,0%). Exige $12.109 MM de plata nueva y dedicación.</li>
+    <li data-e="l6f"><strong>Igualando el capital, el proyecto vale ~$13.000 MM en 20 años</strong> — no los $45.000 MM que sugiere la diferencia de totales. Comparado con no hacer nada y poner esos mismos $12.109 MM al 5%: $85.035 vs $72.029 MM. <strong>A 5 años la ventaja es de apenas $252 MM</strong> ($744 MM vía hijos): el valor está en el largo plazo.</li>
+    <li data-e="l6b"><strong>Vender todo hoy es la peor alternativa</strong> (TIR 0,4% a 5 años, 3,8% a 20): adelanta $2.323 MM de impuesto de las bodegas y se acaba el flujo de los arriendos.</li>
+    <li data-e="l6c"><strong>No hacer nada rinde 6,0% y supera la vara</strong> — es la alternativa pasiva a vencer. Su costo real: la P se la puede llevar otro y la ventana del 0% de Paco corre (5 años, supuesto conservador).</li>
+    <li data-e="l6d"><strong>Comprar la P solo para esperar no paga</strong> (TIR 4,9%): el descuento de comprar a 3 lo que vale 3,3 se lo comen impuestos y años sin renta. Comprar tiene sentido si se va a construir.</li>
+    <li data-e="l6e"><strong>La estructura (hijos vs empresa) sigue importando, pero menos que antes</strong>: $491 MM en el desarrollo esperado (hasta $2.166 MM si va bien) — porque la P se compra afuera y ya no hay traspaso interno. <strong>El socio</strong> financia casi todo (5,8%), pero cuesta media vaca más el 0% de Paco.</li>
+  </ul>
+</section>
+
+<!-- 9 · DESGLOSE -->
+<section class="slide">
+  <div class="kicker" data-e="k7">De dónde sale el total · esperado, venta año 20</div>
+  <h2 data-e="t7">Venta neta + caja acumulada</h2>
+  <p class="legend" style="margin:8px 0 16px"><span><i class="dot seg1"></i> Venta neta del activo (o bolsa si se vende hoy)</span><span><i class="dot seg2"></i> Caja acumulada al 5%</span></p>
+  <div id="bars"></div>
+  <p class="small muted" style="margin-top:12px" data-e="d7a">Estos totales <strong>no son comparables entre sí</strong>: cada alternativa compromete distinta plata (desarrollar son $12.109 MM nuevos de la familia; no hacer nada, cero). Para comparar, la TIR — o la lámina siguiente, que iguala el capital. En la sociedad con socio, la familia recibe la mitad.</p>
+</section>
+
+<!-- 10 · MISMA PLATA -->
+<section class="slide">
+  <div class="kicker" data-e="kn">Peras con peras · esperado, venta año 20</div>
+  <h2 data-e="tn">Todas con la misma plata</h2>
+  <p class="small" style="margin:8px 0 14px;max-width:1020px" data-e="dn1">Desarrollar compromete <strong>$12.109 MM de plata nueva</strong> (más $4.000 MM de crédito); no hacer nada, cero. Para compararlas de verdad, a cada alternativa se le suma la plata que <em>no</em> usa, invertida a la vara del 5% real. Así <strong>todas comprometen los mismos <span id="capNota2">—</span></strong>.</p>
+  <p class="legend" style="margin:0 0 14px"><span><i class="dot seg1"></i> Lo que produce la alternativa</span><span><i class="dot seg2"></i> Plata sobrante invertida al 5%</span></p>
+  <div id="bars2"></div>
+  <div class="total" style="margin-top:14px" data-e="dn2"><strong>La conclusión honesta:</strong> desarrollar no transforma $39.899 MM en $85.035 MM. Transforma <strong>$72.029 MM en $85.035 MM</strong> (vía hijos, $85.526 MM). El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia sale al año 5</strong> ($744 MM vía hijos). Es una apuesta de largo plazo, no un cambio de nivel inmediato.</div>
+  <p class="small muted" style="margin-top:10px" data-e="dn3">Ordenado de mayor a menor. La diferencia contra "no hacer nada" aparece a la derecha de cada barra. El orden es el mismo que da la TIR — como debe ser: igualado el capital, total y TIR dicen lo mismo.</p>
+</section>
+
+<!-- 10 · RIESGOS -->
+<section class="slide">
+  <div class="kicker" data-e="k8">Riesgos</div>
+  <h2 data-e="t8">La rentabilidad no es lo único</h2>
+  <div class="cols2" style="margin-top:12px">
+    <div class="card">
+      <h3 data-e="r8a">Si compramos y desarrollamos</h3>
+      <ul class="small" style="margin-top:8px">
+        <li data-e="r8b">Dedicación: gerente $5 MM/mes por 3 años + supervisión familiar real.</li>
+        <li data-e="r8c">Construcción: $10.616 MM de obra; sobrecostos pegan directo a la TIR.</li>
+        <li data-e="r8d">Concentración: casi todo el patrimonio en un solo paño, más plata nueva adentro.</li>
+        <li data-e="r8e">Deuda: $4.000 MM, cuota 1.057 UF/mes por 10 años.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-e="r8f">Si no compramos la P</h3>
+      <ul class="small" style="margin-top:8px">
+        <li data-e="r8g">Otro comprador se instala al lado: se pierde la única expansión natural del paño, para siempre.</li>
+        <li data-e="r8h">El precio de 3 UF/m² es una oportunidad de hoy; puede no repetirse.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-e="r8j">Riesgo tributario transversal</h3>
+      <ul class="small" style="margin-top:8px">
+        <li data-e="r8k">La ventana del 0% de Paco es un supuesto (5 años): puede acabarse antes por ley o por sucesión — el beneficio es personal y no se hereda.</li>
+        <li data-e="r8l">Nada está confirmado por escrito aún (caminos 44,45%/10%, ventana, $1.350 MM).</li>
+        <li data-e="r8m">Balance: deudas relacionadas (~$2.618 MM a Inv. O. Carballo) a netear en una venta real.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 data-e="r8n">Si entra un socio</h3>
+      <ul class="small" style="margin-top:8px">
+        <li data-e="r8o">Gobierno y salida: sin pacto claro, la familia queda atrapada en su propio activo.</li>
+        <li data-e="r8p">Aportar Bodemall completo gatilla hoy el impuesto de Paco ($1.350 MM) y pierde su 0%.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · PENDIENTES Y PROPUESTA -->
+<section class="slide">
+  <div class="kicker" data-e="k9">Para decidir bien</div>
+  <h2 data-e="t9">Qué falta y qué se propone</h2>
+  <div class="cols2" style="margin-top:12px">
+    <div>
+      <h3 style="color:var(--navy);font-size:17px;margin-bottom:10px" data-e="p9a">Confirmaciones antes de firmar</h3>
+      <ul>
+        <li data-e="p9c">Guerrero por escrito: caminos empresa (44,45%) vs hijos (10%) para la P, y cuánto dura realmente el 0% de Paco.</li>
+        <li data-e="p9d">Contador: valor tributario exacto y tratamiento de utilidades acumuladas y deudas relacionadas.</li>
+        <li data-e="p9e">Avayu: precio y condiciones definitivas de la P (el 3 UF/m² es el supuesto de hoy).</li>
+        <li data-e="p9f">Banco: condiciones del crédito. Socio: términos, gobierno y salida.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="color:var(--navy);font-size:17px;margin-bottom:10px" data-e="p9g">Propuesta al directorio</h3>
+      <ul>
+        <li data-e="p9h">Descartar la venta total hoy: paga el impuesto grande el día 1 sin necesidad.</li>
+        <li data-e="p9i">Si se compra la P, que sea <strong>para desarrollar</strong> — comprar para esperar no supera la vara — y definir la estructura (hijos vs empresa) antes de firmar.</li>
+        <li data-e="p9j">Si la familia no quiere poner $12.109 MM ni dedicarse: negociar con socio, sabiendo que cuesta media vaca + $1.350 MM de Paco. Si no: no hacer nada (6,0%) es digno.</li>
+        <li data-e="p9k">Fijar plazo: la oportunidad con Avayu y la ventana de Paco tienen fecha.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="nav">
+  <span class="pager" id="pager">1 / 11</span>
+  <button onclick="go(-1)">←</button>
+  <button onclick="go(1)">→</button>
+</div>
+<div class="foot" data-e="foot">P de Bodemall · familia completa · UF $40.000 · vara 5% real · modelo 04-08-2026 · borrador para discusión</div>
+
+<script>
+// ---------- datos (modelo_familia_completa v3, 04-08-2026, vara 5%) ----------
+// [estrategia, escenario, horizonte, TIR, total, capitalInicial, ventaNeta, caja, impuestosHoy, impSalida, plataNueva, supera5]
+const D=[["sellnow","pess",5,0.0023,313618,310000,313618,0,58072,0,0,0],["sellnow","pess",20,0.0379,651990,310000,651990,0,58072,0,0,0],["sellnow","base",5,0.0036,315597,310000,315597,0,58072,0,0,0],["sellnow","base",20,0.0382,656103,310000,656103,0,58072,0,0,0],["sellnow","opt",5,0.0048,317575,310000,317575,0,58072,0,0,0],["sellnow","opt",20,0.0385,660216,310000,660216,0,58072,0,0,0],
+["nada","pess",5,0.0334,365347,310000,245728,119619,0,58072,0,0],["nada","pess",20,0.0577,951160,310000,235348,715812,0,68452,0,1],["nada","base",5,0.0404,377798,310000,258179,119619,0,62747,0,0],["nada","base",20,0.0602,997478,310000,281666,715812,0,90919,0,1],["nada","opt",5,0.0474,390850,310000,271231,119619,0,67611,0,0],["nada","opt",20,0.0631,1053814,310000,338002,715812,0,118035,0,1],
+["hold_emp","pess",5,0.0214,497941,448005,378322,119619,0,58072,138005,0],["hold_emp","pess",20,0.0452,1083753,448005,367941,715812,0,68452,138005,0],["hold_emp","base",5,0.0319,523386,447329,403767,119619,0,71233,137329,0],["hold_emp","base",20,0.0486,1156675,447329,440863,715812,0,110598,137329,0],["hold_emp","opt",5,0.0423,549377,446652,429758,119619,0,86549,136652,0],["hold_emp","opt",20,0.0526,1246161,446652,530350,715812,0,164532,136652,1],
+["hold_hij","pess",5,0.0214,497941,448005,378322,119619,0,58072,138005,0],["hold_hij","pess",20,0.0452,1083753,448005,367941,715812,0,68452,138005,0],["hold_hij","base",5,0.0345,529963,447329,410345,119619,0,64656,137329,0],["hold_hij","base",20,0.0493,1171927,447329,456115,715812,0,95346,137329,0],["hold_hij","opt",5,0.0478,564055,446652,444436,119619,0,71872,136652,0],["hold_hij","opt",20,0.0541,1282198,446652,566386,715812,0,128496,136652,1],
+["build_emp","pess",5,0.0009,656102,653225,502524,153579,0,27194,343225,0],["build_emp","pess",20,0.0551,1911036,653225,547155,1363881,0,37574,343225,1],["build_emp","base",5,0.0469,770487,612737,589283,181204,0,54046,302737,0],["build_emp","base",20,0.0642,2125880,612737,639435,1486445,0,58906,302737,1],["build_emp","opt",5,0.079,875653,598790,668864,206789,0,122811,288790,1],["build_emp","opt",20,0.0704,2333650,598790,726071,1607579,0,120616,288790,1],
+["build_hij","pess",5,0.0009,656102,653225,502524,153579,0,27194,343225,0],["build_hij","pess",20,0.0551,1911036,653225,547155,1363881,0,37574,343225,1],["build_hij","base",5,0.0502,782765,612737,601561,181204,0,41769,302737,1],["build_hij","base",20,0.0645,2138158,612737,651712,1486445,0,46629,302737,1],["build_hij","opt",5,0.092,929806,598790,723017,206789,0,68658,288790,1],["build_hij","opt",20,0.0716,2387803,598790,780224,1607579,0,66463,288790,1],
+["jv_emp","pess",5,-0.0145,344255,370362,264859,79396,33750,0,60362,0],["jv_emp","pess",20,0.0498,979724,370362,292365,687360,33750,0,60362,0],["jv_emp","base",5,0.0305,406953,350118,313744,93209,33750,7921,40118,0],["jv_emp","base",20,0.0584,1089892,350118,341250,748642,33750,7921,40118,1],["jv_emp","opt",5,0.0616,462623,343145,356622,106001,33750,39216,33145,1],["jv_emp","opt",20,0.0643,1193336,343145,384128,809209,33750,39216,33145,1]];
+const NAMES={sellnow:"Vender todo ahora",nada:"No hacer nada",hold_emp:"Comprar la P y esperar · empresa",hold_hij:"Comprar la P y esperar · hijos",build_emp:"Comprar la P y desarrollar · empresa",build_hij:"Comprar la P y desarrollar · hijos",jv_emp:"Desarrollar con socio · empresa"};
+const ORDER=["sellnow","nada","hold_emp","hold_hij","build_emp","build_hij","jv_emp"];
+const UF=40000;
+let scen="base",hor=20;
+const fUF=n=>Math.round(n).toLocaleString("es-CL");
+const fMM=n=>"$"+Math.round(n*UF/1e6).toLocaleString("es-CL")+" MM";
+const fPct=n=>(n*100).toFixed(1).replace(".",",")+"%";
+
+function setScen(s){scen=s;paint("tgScen",s);renderTable();}
+function setHor(h){hor=h;paint("tgHor",String(h));renderTable();}
+function paint(id,v){document.querySelectorAll("#"+id+" button").forEach(b=>b.classList.toggle("sel",b.dataset.v===v));}
+// ---------- normalización "misma plata" ----------
+// Cada alternativa compromete distinto capital (patrimonio de hoy + plata nueva).
+// Para comparar totales, a la que usa menos plata se le suma lo que NO usó,
+// invertido a la vara (5% real) hasta el mismo año de venta.
+const VARA=0.05;
+function normalizados(s,h){
+  const rows=ORDER.map(k=>D.find(x=>x[0]===k&&x[1]===s&&x[2]===h)).filter(Boolean);
+  const cap=Math.max(...rows.map(r=>r[5]));
+  const f=Math.pow(1+VARA,h);
+  const out={};
+  for(const r of rows) out[r[0]]={cap,resto:(cap-r[5])*f,comp:r[4]+(cap-r[5])*f};
+  const base=out.nada?out.nada.comp:0;
+  for(const k in out) out[k].dif=out[k].comp-base;
+  return out;
+}
+function renderTable(){
+  const tb=document.querySelector("#resTable tbody");tb.innerHTML="";
+  const N=normalizados(scen,hor);
+  for(const k of ORDER){
+    const r=D.find(x=>x[0]===k&&x[1]===scen&&x[2]===hor);if(!r)continue;
+    const[,,,irr,total,,,,hoy,exit,nuevo,beats]=r;
+    const n=N[k];
+    const dif=k==="nada"?'<span class="tiny muted">referencia</span>'
+      :`<span class="tiny ${n.dif>=0?"pos":"neg"}">${n.dif>=0?"+":"−"}${fMM(Math.abs(n.dif))}</span>`;
+    tb.insertAdjacentHTML("beforeend",`<tr>
+      <td><strong>${NAMES[k]}</strong></td>
+      <td class="num ${beats?"pos":""}">${fPct(irr)}</td>
+      <td class="num"><strong>${fMM(total)}</strong><br><span class="tiny muted">${fUF(total)} UF</span></td>
+      <td class="num"><strong>${fMM(n.comp)}</strong><br>${dif}</td>
+      <td class="num ${hoy>0?"neg":""}">${hoy>0?fMM(hoy):"—"}</td>
+      <td class="num">${exit>0?fMM(exit):"—"}</td>
+      <td class="num">${nuevo>0?fMM(nuevo):"—"}</td>
+      <td>${beats?'<span class="chip c-ok">SUPERA</span>':'<span class="chip c-pen">NO SUPERA</span>'}</td></tr>`);
+  }
+  const cap=N[ORDER[0]].cap;
+  const cn=document.getElementById("capNota");
+  if(cn)cn.textContent=fMM(cap);
+}
+function renderBars(){
+  const rows=ORDER.map(k=>D.find(x=>x[0]===k&&x[1]==="base"&&x[2]===20));
+  const max=Math.max(...rows.map(r=>r[4]));
+  document.getElementById("bars").innerHTML=rows.map(r=>{
+    const[k,,,irr,total,,venta,caja]=r;
+    const w=v=>(v/max*100).toFixed(2)+"%";
+    return`<div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:14px"><strong>${NAMES[k]}</strong> <span class="muted tiny">TIR ${fPct(irr)}</span></span>
+        <span style="font-size:14px;font-weight:700">${fMM(total)}</span></div>
+      <div class="bar"><div class="seg1" style="width:${w(venta)}" title="Venta neta ${fMM(venta)}"></div><div class="seg2" style="width:${w(caja)}" title="Caja ${fMM(caja)}"></div></div>
+    </div>`;
+  }).join("");
+}
+function renderBars2(){
+  const N=normalizados("base",20);
+  const rows=ORDER.map(k=>({k,r:D.find(x=>x[0]===k&&x[1]==="base"&&x[2]===20),n:N[k]}))
+    .sort((a,b)=>b.n.comp-a.n.comp);
+  const max=Math.max(...rows.map(x=>x.n.comp));
+  const cap=rows[0].n.cap;
+  const c2=document.getElementById("capNota2");if(c2)c2.textContent=fMM(cap);
+  document.getElementById("bars2").innerHTML=rows.map(({k,r,n})=>{
+    const w=v=>(v/max*100).toFixed(2)+"%";
+    const dif=k==="nada"?'<span class="muted tiny">referencia</span>'
+      :`<span class="tiny ${n.dif>=0?"pos":"neg"}" style="font-weight:700">${n.dif>=0?"+":"−"}${fMM(Math.abs(n.dif))}</span>`;
+    return`<div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:14px"><strong>${NAMES[k]}</strong> <span class="muted tiny">TIR ${fPct(r[3])}</span></span>
+        <span style="font-size:14px"><strong>${fMM(n.comp)}</strong> &nbsp;${dif}</span></div>
+      <div class="bar"><div class="seg1" style="width:${w(r[4])}" title="La alternativa produce ${fMM(r[4])}"></div><div class="seg2" style="width:${w(n.resto)}" title="Plata sobrante al 5%: ${fMM(n.resto)}"></div></div>
+    </div>`;
+  }).join("");
+}
+
+// ---------- navegación ----------
+const slides=[...document.querySelectorAll(".slide")];let cur=0;
+function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,j)=>s.classList.toggle("on",j===cur));document.getElementById("pager").textContent=(cur+1)+" / "+slides.length;}
+function go(d){show(cur+d);}
+document.addEventListener("keydown",e=>{
+  if(document.body.classList.contains("editing"))return;
+  if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" ")go(1);
+  if(e.key==="ArrowLeft"||e.key==="PageUp")go(-1);
+  if(e.key==="Home")show(0); if(e.key==="End")show(slides.length-1);
+});
+
+// ---------- edición ----------
+const LS="pbodemall_slides_edits_r6"; // mapa v3: versiones anteriores ya incorporadas
+function applyEdits(){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");for(const[id,html]of Object.entries(m)){const el=document.querySelector(`[data-e="${id}"]`);if(el)el.innerHTML=html;}}catch(e){}}
+function saveEdit(el){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");m[el.dataset.e]=el.innerHTML;localStorage.setItem(LS,JSON.stringify(m));}catch(e){}}
+function toggleEdit(){
+  const on=!document.body.classList.contains("editing");
+  document.body.classList.toggle("editing",on);
+  document.getElementById("btnEdit").classList.toggle("active",on);
+  document.getElementById("btnEdit").textContent=on?"✔ Listo":"✎ Editar";
+  document.getElementById("editnote").style.display=on?"block":"none";
+  document.querySelectorAll("[data-e]").forEach(el=>{
+    el.setAttribute("contenteditable",on?"true":"false");
+    if(on&&!el.dataset.bound){el.dataset.bound="1";el.addEventListener("blur",ev=>saveEdit(ev.currentTarget));}
+  });
+}
+function resetEdits(){if(confirm("¿Borrar todas las ediciones y volver al original?")){localStorage.removeItem(LS);location.reload();}}
+function downloadCopy(){
+  const wasEditing=document.body.classList.contains("editing");if(wasEditing)toggleEdit();
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll("[contenteditable]").forEach(el=>el.removeAttribute("contenteditable"));
+  const blob=new Blob(["<!DOCTYPE html>\n"+clone.outerHTML],{type:"text/html"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Presentacion_slides_directorio_P_de_Bodemall.html";a.click();URL.revokeObjectURL(a.href);
+}
+
+applyEdits();renderTable();renderBars();renderBars2();show(0);
+</script>
+<a id="homelink" href="index.html" style="position:fixed;bottom:14px;left:14px;z-index:60;background:#fff;border:1px solid #e3e8ee;border-radius:9px;padding:6px 12px;font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#17365D;text-decoration:none">⌂ Menú</a>
+</body>
+</html>

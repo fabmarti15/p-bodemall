@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>P de Bodemall — Comparativo simple</title>
+<style>
+  :root{--navy:#17365D;--ink:#1c2430;--gray:#66707d;--line:#e3e8ee;--green:#1a7a40;--greenbg:#e9f5ee;--red:#b3261e;--redbg:#fbeae9;--bluebg:#edf3fc;--amberbg:#fdf6dd;--amber:#8a6d00}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;padding:44px 56px 60px;max-width:1180px;margin:0 auto}
+  h1{font-size:28px;color:var(--navy);margin-bottom:4px}
+  .sub{font-size:14px;color:var(--gray);margin-bottom:8px}
+  .linkbar{font-size:13.5px;margin-bottom:20px}
+  .linkbar a{color:#2456a6;text-decoration:none;border-bottom:1px solid #c9d9f2}
+  .hint{font-size:12.5px;color:var(--amber);background:var(--amberbg);display:inline-block;padding:4px 10px;border-radius:8px;margin-bottom:16px}
+  .row{display:grid;grid-template-columns:250px 1fr;gap:18px;border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:12px;align-items:start}
+  .row.best{border-color:var(--green);background:var(--greenbg)}
+  .row.worst{border-color:#f0c9c6;background:var(--redbg)}
+  .name{font-size:16px;font-weight:700;color:var(--navy)}
+  .tir{font-size:22px;font-weight:700;margin-top:2px}
+  .tir small{font-size:12px;font-weight:400;color:var(--gray)}
+  .total{font-size:13px;color:var(--gray);margin-top:2px}
+  .pos{color:var(--green)} .neg{color:var(--red)}
+  .tl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;position:relative}
+  .tl::before{content:"";position:absolute;top:6px;left:8px;right:16%;height:2px;background:var(--line)}
+  .step{position:relative;padding:22px 16px 0 2px;cursor:pointer;outline:none}
+  .step::before{content:"";position:absolute;left:0;top:0;width:13px;height:13px;border-radius:99px;background:var(--navy);border:2.5px solid #fff;box-shadow:0 0 0 1.5px var(--navy)}
+  .step::after{content:"+";position:absolute;left:2.5px;top:-1.5px;color:#fff;font-size:11px;font-weight:700;line-height:1;pointer-events:none}
+  .when{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:3px}
+  .step p{font-size:13px;line-height:1.45}
+  .tip{display:none;margin-top:8px;background:var(--bluebg);border:1px solid #c9d9f2;border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.5;color:var(--ink)}
+  @media (hover:hover){ .step:hover .tip{display:block} }
+  .step.open .tip{display:block}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:99px;margin-top:6px}
+  .b-ok{background:var(--greenbg);color:var(--green);border:1px solid #bfe3cd} .b-no{background:var(--redbg);color:var(--red);border:1px solid #f0c9c6}
+  .samebox{border:1px solid #c9d9f2;background:var(--bluebg);border-radius:14px;padding:18px 22px 16px;margin-bottom:20px}
+  .samebox h2{font-size:18px;color:var(--navy);margin-bottom:8px}
+  .samebox p{font-size:13.5px;line-height:1.55;margin-bottom:8px}
+  .mtab{border-collapse:collapse;width:100%;background:#fff;border-radius:10px;overflow:hidden;margin:10px 0 12px}
+  .mtab th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);font-weight:600;text-align:left;padding:8px 11px;border-bottom:1.5px solid var(--line)}
+  .mtab td{font-size:13.5px;padding:7px 11px;border-bottom:1px solid var(--line)}
+  .mtab tr:last-child td{border-bottom:0}
+  .mtab .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .mtab tr.hi td{background:var(--greenbg)}
+  .concl{background:#fff;border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:9px 12px}
+  .mnote{font-size:12px!important;color:var(--gray)}
+  .same{font-size:12.5px;color:var(--navy);background:var(--bluebg);border-radius:7px;padding:3px 8px;display:inline-block;margin-top:5px}
+  .foot{font-size:12px;color:var(--gray);margin-top:18px;line-height:1.5}
+  .foot a{color:#2456a6}
+  .toolbar{position:fixed;top:12px;right:14px;display:flex;gap:8px;z-index:20}
+  .toolbar button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 12px;font-size:12.5px;cursor:pointer}
+  .editing [data-e]{outline:1.5px dashed #d9a800;outline-offset:2px;border-radius:3px}
+  @media (max-width:760px){
+    body{padding:18px 14px 40px}
+    h1{font-size:21px;margin-top:34px}
+    .row{grid-template-columns:1fr;gap:10px;padding:14px}
+    .tl{grid-template-columns:1fr}
+    .tl::before{top:8px;bottom:8px;left:6px;right:auto;width:2px;height:auto}
+    .step{padding:0 0 14px 26px}
+    .step::before{left:0;top:2px}
+    .step::after{left:2.5px;top:0.5px}
+    .step p{font-size:13.5px}
+    .toolbar{position:absolute;top:10px;right:10px}
+  }
+  @media print{.toolbar,.hint{display:none}body{padding:20px}.tip{display:block}}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button id="btnEdit" onclick="toggleEdit()">✎ Editar</button>
+  <button onclick="downloadCopy()">⬇ Descargar</button>
+  <button onclick="window.print()">Imprimir</button>
+</div>
+
+<h1 data-e="t">P de Bodemall — las 7 alternativas en una página</h1>
+<p class="sub" data-e="s">Caso esperado · familia completa · venta hipotética año 20 · UF $40.000 · vara: 5% real (5% + inflación). La P es del vecino (Avayu/Indumotora): comprarla es plata que sale de la familia. El 0% de Paco se asume vigente solo 5 años más.</p>
+<p class="linkbar" data-e="lk">Detalle completo: <a href="Presentacion_slides_directorio_P_de_Bodemall.html">abrir la presentación del directorio →</a></p>
+<p class="hint" data-e="h">Pasa el mouse (o toca en el celular) sobre cada punto ● para ver la explicación completa.</p>
+
+<div class="samebox">
+  <h2 data-e="mp0">Antes de mirar los totales: peras con peras</h2>
+  <p data-e="mp1">Los "Total familia" de cada alternativa <strong>no son comparables entre sí</strong>, porque cada una compromete distinta plata. Desarrollar exige <strong>$12.109 MM nuevos de la familia</strong> (más $4.000 MM de crédito); no hacer nada no exige nada. Un total más grande puede ser solo plata más grande, no mejor negocio.</p>
+  <p data-e="mp2">Para igualarlas, a cada alternativa se le suma la plata que <em>no</em> usa, invertida en la vara (5% real). Así <strong>las siete comprometen los mismos $24.509 MM</strong> y los totales sí se pueden comparar:</p>
+  <table class="mtab">
+    <thead><tr><th>Alternativa</th><th class="n">Plata nueva</th><th class="n">Total con la misma plata</th><th class="n">vs no hacer nada</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td data-e="mr6">6 · Desarrollar · hijos ⭐</td><td class="n" data-e="mr6a">$12.109 MM</td><td class="n"><strong data-e="mr6b">$85.526 MM</strong></td><td class="n pos" data-e="mr6c">+$13.497 MM</td></tr>
+      <tr class="hi"><td data-e="mr5">5 · Desarrollar · empresa</td><td class="n" data-e="mr5a">$12.109 MM</td><td class="n"><strong data-e="mr5b">$85.035 MM</strong></td><td class="n pos" data-e="mr5c">+$13.006 MM</td></tr>
+      <tr><td data-e="mr2">2 · No hacer nada</td><td class="n" data-e="mr2a">—</td><td class="n"><strong data-e="mr2b">$72.029 MM</strong></td><td class="n" data-e="mr2c">referencia</td></tr>
+      <tr><td data-e="mr7">7 · Con socio 50/50</td><td class="n" data-e="mr7a">$1.605 MM</td><td class="n"><strong data-e="mr7b">$71.468 MM</strong></td><td class="n neg" data-e="mr7c">−$561 MM</td></tr>
+      <tr><td data-e="mr4">4 · Esperar · hijos</td><td class="n" data-e="mr4a">$5.493 MM</td><td class="n"><strong data-e="mr4b">$64.432 MM</strong></td><td class="n neg" data-e="mr4c">−$7.597 MM</td></tr>
+      <tr><td data-e="mr3">3 · Esperar · empresa</td><td class="n" data-e="mr3a">$5.493 MM</td><td class="n"><strong data-e="mr3b">$63.822 MM</strong></td><td class="n neg" data-e="mr3c">−$8.207 MM</td></tr>
+      <tr><td data-e="mr1">1 · Vender todo ahora</td><td class="n" data-e="mr1a">—</td><td class="n"><strong data-e="mr1b">$58.374 MM</strong></td><td class="n neg" data-e="mr1c">−$13.655 MM</td></tr>
+    </tbody>
+  </table>
+  <p class="concl" data-e="mp3"><strong>La conclusión honesta:</strong> desarrollar no transforma $39.899 MM en $85.035 MM. Transforma <strong>$72.029 MM en $85.035 MM</strong>. El proyecto vale <strong>~$13.000 MM en 20 años</strong> — y solo <strong>$252 MM si la familia vende al año 5</strong> ($744 MM vía hijos). Es una apuesta de largo plazo.</p>
+  <p class="mnote" data-e="mp4">Ordenado igual que la TIR, como corresponde: con el capital igualado, el total y la TIR dicen lo mismo. Cada fila de abajo repite su "misma plata".</p>
+</div>
+
+<div class="row worst">
+  <div>
+    <div class="name" data-e="a1">1 · Vender todo ahora</div>
+    <div class="tir neg" data-e="a1t">TIR 3,8% <small>(a 5 años: 0,4%)</small></div>
+    <div class="total" data-e="a1x">Total familia: $26.244 MM</div>
+    <div class="same" data-e="a1s">Misma plata: <strong>$58.374 MM</strong> · <span class="neg">−$13.655 MM</span></div>
+    <span class="badge b-no" data-e="a1b">NO SUPERA EL 5%</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy</span><p data-e="a1p1">Se vende todo en $12.400 MM. Venta de terreno no paga impuestos, pero las bodegas pagan <strong>$2.323 MM</strong> altiro. Quedan $9.891 MM.</p>
+      <div class="tip" data-e="a1q1">La familia acepta la oferta de $12.400 MM por lo suyo (terreno de Paco + bodegas). El SII no cobra nada por el terreno de Paco (lo compró antes de 2004 y la ventana sigue abierta). Pero las bodegas son de la empresa: en sus libros valen $3.022 MM y se venden en $8.248 MM; por esa diferencia se paga ~44% = $2.323 MM. Sumando el costo de venta (1,5%), quedan $9.891 MM limpios.</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 1–20</span><p data-e="a1p2">La plata trabaja al 5%. Se acaba el flujo por los arriendos.</p>
+      <div class="tip" data-e="a1q2">Los $9.891 MM se invierten en Falcon/Banchile al 5% real anual (5% por sobre la inflación). Como ya no hay bodegas, no entra ni un peso más de arriendo. La familia queda 100% invertida en el mercado financiero.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a1p3">La bolsa llega a $26.244 MM.</p>
+      <div class="tip" data-e="a1q3">Con interés compuesto, los $9.891 MM se transforman en $26.244 MM en 20 años. La rentabilidad total queda en 3,8% anual — menos que el 5% — porque el impuesto que se pagó el día 1 nunca se recupera: esa plata dejó de trabajar 20 años.</div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <div class="name" data-e="a2">2 · No hacer nada</div>
+    <div class="tir" data-e="a2t">TIR 6,0% <small>(a 5 años: 4,0%)</small></div>
+    <div class="total" data-e="a2x">Total familia: $39.899 MM</div>
+    <div class="same" data-e="a2s">Misma plata: <strong>$72.029 MM</strong> · referencia</div>
+    <span class="badge b-ok" data-e="a2b">SUPERA EL 5% A 20 AÑOS</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy</span><p data-e="a2p1">Cero movimiento, cero impuesto.</p>
+      <div class="tip" data-e="a2q1">Todo queda exactamente como está: el terreno a nombre de Paco, las bodegas en la empresa, los 32 arrendatarios pagando. No se firma nada, no se paga nada. La P queda en manos del vecino (y alguien más puede comprarla).</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 1–20</span><p data-e="a2p2">Bodemall rinde $866 MM/año, acumulados al 5% → $28.632 MM.</p>
+      <div class="tip" data-e="a2q2">Los arriendos dejan $866 MM al año después de gastos. Esa plata no se reparte: se guarda invertida al 5% real y en 20 años junta $28.632 MM. Alguien tiene que seguir administrando las bodegas todo ese tiempo.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a2p3">Se vende a un tercero. El terreno de Paco ya perdió su 0% (asumimos que dura 5 años): paga $507 MM. Bodegas: $3.130 MM.</p>
+      <div class="tip" data-e="a2q3">Recién en 20 años más se vende todo a un comprador de afuera. Para ser conservadores asumimos que el beneficio de Paco dura solo 5 años más: vendiendo en el año 20, su terreno paga 10% de la ganancia ($507 MM). Las bodegas pagan $3.130 MM por su ganancia sobre valor libro. Si se vendiera dentro de los próximos 5 años, el terreno pagaría $0.</div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <div class="name" data-e="a3">3 · Comprar la P y esperar · empresa</div>
+    <div class="tir" data-e="a3t">TIR 4,9% <small>(a 5 años: 3,2%)</small></div>
+    <div class="total" data-e="a3x">Total familia: $46.267 MM · plata nueva $5.493 MM</div>
+    <div class="same" data-e="a3s">Misma plata: <strong>$63.822 MM</strong> · <span class="neg">−$8.207 MM</span></div>
+    <span class="badge b-no" data-e="a3b">NO SUPERA EL 5%</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy</span><p data-e="a3p1">Se le compra la P a Avayu en $5.412 MM (+1,5% de gastos), a nombre de una sociedad. Nadie de la familia paga impuestos por comprar.</p>
+      <div class="tip" data-e="a3q1">La P (45.099,8 m²) es del vecino: comprarla es plata que sale de la familia hacia Avayu/Indumotora, a 3 UF/m². La gracia: unida al paño de Bodemall vale más (3,3 UF/m² en el caso esperado) — se compra con descuento por ser el vecino natural.</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 1–20</span><p data-e="a3p2">La P queda vacía: no genera arriendo. Bodemall sigue igual.</p>
+      <div class="tip" data-e="a3q2">Nada cambia en la operación: los mismos $866 MM/año de las bodegas de siempre. La P solo acumula plusvalía (1% real al año en el caso esperado) mientras está vacía.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a3p3">Al vender, la ganancia de la P paga ~44% (empresa). Impuestos totales: $4.424 MM.</p>
+      <div class="tip" data-e="a3q3">Se vende todo el conjunto en ~$22.395 MM. Como la P la compró una sociedad, su plusvalía paga ~44% (impuesto de empresa + retiro). Más las bodegas (44% sobre libro) y el terreno de Paco (10%, ya sin ventana): $4.424 MM en impuestos. La plusvalía de comprar barato se la comen los impuestos y los años de espera.</div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <div class="name" data-e="a4">4 · Comprar la P y esperar · hijos</div>
+    <div class="tir" data-e="a4t">TIR 4,9% <small>(a 5 años: 3,4%)</small></div>
+    <div class="total" data-e="a4x">Total familia: $46.877 MM · plata nueva $5.493 MM</div>
+    <div class="same" data-e="a4s">Misma plata: <strong>$64.432 MM</strong> · <span class="neg">−$7.597 MM</span></div>
+    <span class="badge b-no" data-e="a4b">NO SUPERA EL 5%</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy</span><p data-e="a4p1">Igual que la anterior, pero la P queda a nombre de los hijos como personas.</p>
+      <div class="tip" data-e="a4q1">Misma compra a Avayu ($5.412 MM + gastos), pero los dueños son los hijos directamente, no una sociedad. Comprar no paga impuestos; la diferencia aparece recién al vender.</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 1–20</span><p data-e="a4p2">Igual: la P vacía, Bodemall rindiendo.</p>
+      <div class="tip" data-e="a4q2">La operación diaria es idéntica. La única diferencia con la alternativa 3 es tributaria y aparece al final.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a4p3">La ganancia de la P paga solo 10%: impuestos totales $3.814 MM ($610 MM menos que vía empresa).</p>
+      <div class="tip" data-e="a4q3">Los hijos venden como personas: la plusvalía de la P paga un impuesto único de 10% en vez de ~44%. En el caso esperado eso ahorra $610 MM frente a comprar vía empresa. Aun así, un terreno vacío 20 años no le gana al 5%: la TIR queda en 4,9%.</div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <div class="name" data-e="a5">5 · Comprar la P y desarrollar · empresa</div>
+    <div class="tir pos" data-e="a5t">TIR 6,4% <small>(a 5 años: 4,7%)</small></div>
+    <div class="total" data-e="a5x">Total familia: $85.035 MM · plata nueva $12.109 MM</div>
+    <div class="same" data-e="a5s">Misma plata: <strong>$85.035 MM</strong> · <span class="pos">+$13.006 MM</span></div>
+    <span class="badge b-ok" data-e="a5b">SUPERA EL 5% A 20 AÑOS</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy → año 3</span><p data-e="a5p1">Compra a Avayu + obra de $10.616 MM (24.128 m²) con crédito de $4.000 MM y gerente dedicado.</p>
+      <div class="tip" data-e="a5q1">Se compra la P y se construyen 24.128 m² de bodegas nuevas en 3 años. Se financia con crédito de $4.000 MM (cuota 1.057 UF/mes por 10 años) y $12.109 MM de plata nueva de la familia. Gerente dedicado: $5 MM/mes por 3 años. Comprar a un tercero no gatilla ningún impuesto hoy.</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 4–20</span><p data-e="a5p2">La renta sube a ~$2.270 MM/año entre bodegas viejas y nuevas.</p>
+      <div class="tip" data-e="a5q2">Las bodegas nuevas se van llenando (30% → 70% → 95%). En régimen, el arriendo total llega a ~$2.270 MM al año. Con eso se paga el crédito y el resto se acumula al 5%: $59.458 MM de caja al año 20.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a5p3">Venta por renta: $28.359 MM; impuestos $2.356 MM.</p>
+      <div class="tip" data-e="a5q3">Un comprador paga por la renta que produce el conjunto: $28.359 MM. Lo nuevo (P + construcción) paga ~44% de su ganancia — que es acotada, porque la inversión fue grande y descuenta. Con bodegas y terreno de Paco: $2.356 MM. TIR 6,4%: el paño produjo renta de verdad durante 17 años.</div></div>
+  </div>
+</div>
+
+<div class="row best">
+  <div>
+    <div class="name" data-e="a6">6 · Comprar la P y desarrollar · hijos ⭐</div>
+    <div class="tir pos" data-e="a6t">TIR 6,5% <small>(a 5 años: 5,0%)</small></div>
+    <div class="total" data-e="a6x">Total familia: $85.526 MM · plata nueva $12.109 MM</div>
+    <div class="same" data-e="a6s">Misma plata: <strong>$85.526 MM</strong> · <span class="pos">+$13.497 MM</span></div>
+    <span class="badge b-ok" data-e="a6b">LA MEJOR A 20 AÑOS</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy → año 3</span><p data-e="a6p1">Igual que la anterior, pero la P y lo construido quedan a nombre de los hijos.</p>
+      <div class="tip" data-e="a6q1">Misma compra, misma obra, mismo crédito y mismo gerente que la alternativa 5. La diferencia: el terreno y las bodegas nuevas son de los hijos como personas, no de una sociedad.</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 4–20</span><p data-e="a6p2">Misma renta de ~$2.270 MM/año.</p>
+      <div class="tip" data-e="a6q2">La operación es idéntica: bodegas llenándose, crédito pagándose, caja acumulándose al 5%.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a6p3">Lo nuevo paga solo 10%: impuestos $1.865 MM — $491 MM menos que vía empresa.</p>
+      <div class="tip" data-e="a6q3">Al vender, lo que está a nombre de los hijos paga 10% de la ganancia en vez de ~44%. En el caso esperado son $491 MM de diferencia (y más si el negocio resulta mejor: $2.166 MM en el escenario optimista). Es la única alternativa que además empata la vara ya al año 5 (TIR 5,0%).</div></div>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <div class="name" data-e="a7">7 · Desarrollar con socio 50/50</div>
+    <div class="tir" data-e="a7t">TIR 5,8% <small>(a 5 años: 3,1%)</small></div>
+    <div class="total" data-e="a7x">Total familia: $43.596 MM · plata nueva $255 MM + $1.350 MM de impuesto de Paco</div>
+    <div class="same" data-e="a7s">Misma plata: <strong>$71.468 MM</strong> · <span class="neg">−$561 MM</span></div>
+    <span class="badge b-ok" data-e="a7b">SUPERA EL 5% · PACO PIERDE SU 0%</span>
+  </div>
+  <div class="tl">
+    <div class="step" tabindex="0"><span class="when">Hoy → año 3</span><p data-e="a7p1">La familia aporta Bodemall completo (incluido el terreno de Paco) a la sociedad; el socio financia la compra de la P y la obra. Paco paga <strong>$1.350 MM</strong>.</p>
+      <div class="tip" data-e="a7q1">Se crea una sociedad 50/50 con un socio operador (tipo Invinsa/ILogis: top-5 en bodegas de Chile). La familia aporta Bodemall completo valorado en $11.600 MM — y como el terreno de Paco entra a una sociedad relacionada, Paco pierde su 0% y paga ~$1.350 MM hoy (estimación Guerrero). El socio pone la plata para comprarle la P a Avayu y construir; la familia solo agrega $255 MM.</div></div>
+    <div class="step" tabindex="0"><span class="when">Años 4–20</span><p data-e="a7p2">El socio opera; la mitad de la renta es de él.</p>
+      <div class="tip" data-e="a7q2">El socio se encarga de la operación (menos trabajo y menos riesgo de ejecución para la familia), pero de cada peso de arriendo, 50 centavos son suyos. Y las decisiones grandes — vender, endeudarse, repartir — hay que acordarlas con él.</div></div>
+    <div class="step" tabindex="0"><span class="when">Año 20</span><p data-e="a7p3">A la familia le toca el 50%: $43.596 MM.</p>
+      <div class="tip" data-e="a7q3">La sociedad vende por renta igual que en las alternativas 5 y 6, pero a la familia le corresponde la mitad de la venta y de la caja: $43.596 MM. La TIR (5,8%) supera la vara porque la familia puso muy poca plata — el costo real es entregar la mitad de la vaca lechera y el beneficio de Paco.</div></div>
+  </div>
+</div>
+
+<p class="foot" data-e="f">Supuestos clave: P a 3 UF/m² (unida vale 3,3 en el esperado) · ventana del 0% de Paco: 5 años (conservador) · valor libro bodegas $3.022 MM (balance jun-2026) · caja reinvertida al 5% real. Pendiente por escrito: ventana y motivo del 0% · caminos empresa/hijos (Guerrero) · condiciones del banco y del socio. Detalle completo en <a href="Presentacion_slides_directorio_P_de_Bodemall.html">la presentación del directorio</a>.</p>
+
+<script>
+document.querySelectorAll(".step").forEach(s=>{
+  s.addEventListener("click",e=>{
+    if(document.body.classList.contains("editing"))return;
+    s.classList.toggle("open");
+  });
+});
+const LS="pbodemall_comparativo_edits_4"; // mapa v3: ediciones anteriores ya incorporadas
+function applyEdits(){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");for(const[id,html]of Object.entries(m)){const el=document.querySelector(`[data-e="${id}"]`);if(el)el.innerHTML=html;}}catch(e){}}
+function saveEdit(el){try{const m=JSON.parse(localStorage.getItem(LS)||"{}");m[el.dataset.e]=el.innerHTML;localStorage.setItem(LS,JSON.stringify(m));}catch(e){}}
+function toggleEdit(){
+  const on=!document.body.classList.contains("editing");
+  document.body.classList.toggle("editing",on);
+  document.getElementById("btnEdit").textContent=on?"✔ Listo":"✎ Editar";
+  document.querySelectorAll("[data-e]").forEach(el=>{
+    el.setAttribute("contenteditable",on?"true":"false");
+    if(on&&!el.dataset.bound){el.dataset.bound="1";el.addEventListener("blur",ev=>saveEdit(ev.currentTarget));}
+  });
+  if(on)document.querySelectorAll(".step").forEach(s=>s.classList.add("open"));
+}
+function downloadCopy(){
+  if(document.body.classList.contains("editing"))toggleEdit();
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll("[contenteditable]").forEach(el=>el.removeAttribute("contenteditable"));
+  const blob=new Blob(["<!DOCTYPE html>\n"+clone.outerHTML],{type:"text/html"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="Comparativo_simple_alternativas_P_de_Bodemall.html";a.click();URL.revokeObjectURL(a.href);
+}
+applyEdits();
+</script>
+<a id="homelink" href="index.html" style="position:fixed;bottom:14px;left:14px;z-index:60;background:#fff;border:1px solid #e3e8ee;border-radius:9px;padding:6px 12px;font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#17365D;text-decoration:none">⌂ Menú</a>
+</body>
+</html>
